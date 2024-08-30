@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: STD23052 - TD5
+  version: '1.0.3'
+servers:
+  - url: https://localhost.std23052.com
+paths:
+  /customers/{customerId}:
+    put:
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        200:
+          description: Client modifié avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+
+    patch:
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+      responses:
+        200:
+          description: Client modifié partiellement avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        age:
+          type: integer
+          
